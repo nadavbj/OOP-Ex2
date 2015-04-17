@@ -1,3 +1,4 @@
+package hw2;
 
 public class PolyTerm {
 	private Scalar coefficient;

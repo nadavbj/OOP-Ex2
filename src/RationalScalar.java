@@ -1,28 +1,69 @@
+package hw2;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 
-public class RationalScalar extends Scalar {
-	private int a,b;
-	public RationalScalar(int a,int b) {
-		this.a=a;
-		if(b==0)
+public class RationalScalar implements Scalar {
+	private int _numerator;
+	private int _denominator;
+	
+	public RationalScalar(int numerator, int denominator){
+		int gcd;		
+		gcd = Math.abs(GCD(numerator, denominator));		
+		_numerator = numerator / gcd;
+		if(_denominator==0)
 			throw new RuntimeException("Can't devied by zero");
-		this.b=b;
+		_denominator = denominator / gcd;				
 	}
-	public int getA() {
-		return a;
+	
+	public RationalScalar(Scalar other){
+		RationalScalar rat = (RationalScalar) other;
+		_numerator = rat.getNumenator();
+		_denominator = rat.getDenominator();		
 	}
-	public void setA(int a) {
-		this.a = a;
+	
+	
+	/**
+	 * addition of two RationalNumbers.
+	 * assuming arg is a RationalNumber.
+	 * could also add instanceof, but left it that way, so that th RationalNumber will
+	 * only get the same type when it calculates. 
+	 * (because of the drawbacks of instanceof in software developing.
+	 * in the future, when creating more Classes that implements Scalar, should check which one is arg.
+	 */
+	
+	public Scalar adding (Scalar arg) {		
+		RationalScalar ratArg = (RationalNumber) arg;
+		int numeratorArg = ratArg.getNumenator();
+		int denominatorArg = ratArg.getDenominator();
+		int tNumerator = (_numerator * denominatorArg) + (_denominator * numeratorArg); 
+		int tDenominator = _denominator * denominatorArg; 
+		int gcd = Math.abs(GCD(tNumerator, tDenominator));
+		tNumerator /= gcd;
+		tDenominator /= gcd;
+		
+		Scalar newScalar = new RationalNumber(tNumerator, tDenominator);		
+		return newScalar;
 	}
-	public int getB() {
-		return b;
+	
+	
+	
+	
+	
+	public int GCD(int a, int b){
+		if (b==0) return a;	
+		return GCD(b,a%b);
 	}
-	public void setB(int b) {
-		if(b==0)
-			throw new RuntimeException("Can't devied by zero");
-		this.b = b;
+	
+	
+	public int getNumenator(){
+		return _numerator;		
 	}
+	
+	public int getDenominator(){
+		return _denominator;
+	}
+		
 	/**
 	 * @see Scalar#add(Scalar)
 	 */

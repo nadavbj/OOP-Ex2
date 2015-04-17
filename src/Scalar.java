@@ -1,5 +1,6 @@
+package hw2;
 
-public abstract class Scalar {
+public interface Scalar {
 	/**
 	 * accepts a scalar argument and returns a
 	 * scalar which is the sum of the current scalar and the argument.
