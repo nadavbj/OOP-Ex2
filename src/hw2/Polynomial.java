@@ -9,8 +9,17 @@ import java.util.Vector;
 
 public class Polynomial {
 	Vector<PolyTerm>terms;
+	
 	public Polynomial(Collection<PolyTerm> terms) {
 		this.terms=new Vector<PolyTerm>(terms);
+	}
+	
+	public Polynomial(String expr) {
+		this.terms=new Vector<PolyTerm>();
+		String polyTerms[]=expr.split("+");
+		for (int i = 0; i < polyTerms.length; i++) {
+			terms.addElement(new PolyTerm(polyTerms[i]));
+		}
 	}
 	/**
 	 * @return a Polynomial which is the sum of the current Polynomial
@@ -30,7 +39,6 @@ public class Polynomial {
 	}
 	private void sortTerms() {
 		terms.sort(new Comparator<PolyTerm>() {
-
 			@Override
 			public int compare(PolyTerm o1, PolyTerm o2) {
 				return o1.getExponent()-o2.getExponent();
