@@ -9,11 +9,11 @@ import java.util.Vector;
 
 public class Polynomial {
 	Vector<PolyTerm>terms;
-	
+
 	public Polynomial(Collection<PolyTerm> terms) {
 		this.terms=new Vector<PolyTerm>(terms);
 	}
-	
+
 	public Polynomial(String expr) {
 		this.terms=new Vector<PolyTerm>();
 		String polyTerms[]=expr.split("+");
@@ -34,7 +34,7 @@ public class Polynomial {
 			if(terms.get(i1).getExponent()==terms.get(i2).getExponent())
 				;//TODO: continue
 		}
-		
+
 		return new Polynomial(result);
 	}
 	private void sortTerms() {
