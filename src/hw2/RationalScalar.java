@@ -130,7 +130,7 @@ public class RationalScalar extends Scalar {
 		
 		public String toString(){
 			String str = new String();		
-			str = str + _numerator + "  " + _denominator;		
+			str = str + _numerator + "/" + _denominator;		
 			return str;		
 		}
 		

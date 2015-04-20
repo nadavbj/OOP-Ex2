@@ -3,46 +3,50 @@ package hw2;
 public class PolyTerm implements Comparable{
 	private Scalar _coefficient;
 	private int _exponent;
-		
-	
+
+
 	public PolyTerm (Scalar coefficient, int exponent){
 		this._coefficient = coefficient;
 		this._exponent = exponent;
-		
+
 	}
 
 	//receives a PolyTerm and returns true if the argument PolyTerm can be added to the
 
 	public PolyTerm (String polystring){
+		
+		
 		String[] temp;
-		  String delimiter = "x";
-		  temp = polystring.split(delimiter);
-		  System.out.println(polystring);
-		  for (int i = 0; i < temp.length; i++) {
-			System.out.println(temp[i]);
+		String delimiter = "x\\^";
+		temp = polystring.split(delimiter);
+		
+		// check for the exponent
+		int expp;
+		if(temp.length==1)
+			expp=0;
+		else
+			expp= Integer.parseInt(temp[1]);
+		this._exponent = expp;
+		// check for the coefficient
+		if (temp[0].contains("/") ){
+			if (Character.toString(temp[0].charAt(0)).matches("-") ){
+				String numerator = temp[0].substring(0,2); 
+				String denominator = temp[0].substring(3,4); 
+				this._coefficient = new RationalScalar (Integer.parseInt(numerator),Integer.parseInt( denominator));   
+			}
+			else {
+				String numerator = temp[0].substring(0,1); 
+				String denominator = temp[0].substring(2,3); 
+				this._coefficient = new RationalScalar (Integer.parseInt(numerator),Integer.parseInt( denominator));  
+			}
 		}
-		 // check for the exponent
-		  char exp = temp[1].charAt(1);
-		   int expp = (int) exp;
-		   this._exponent = expp;
-		 // check for the coefficient
-		   if (temp[0].contains("/") ){
-			   if (Character.toString(temp[0].charAt(0)).matches("-") ){
-				   String numerator = temp[0].substring(0,2); 
-				   String denominator = temp[0].substring(3,4); 
-				   this._coefficient = new RationalScalar (Integer.parseInt(numerator),Integer.parseInt( denominator));   
-			   }
-			   else {
-				   String numerator = temp[0].substring(0,1); 
-				   String denominator = temp[0].substring(2,3); 
-				   this._coefficient = new RationalScalar (Integer.parseInt(numerator),Integer.parseInt( denominator));  
-			   }
-		   }
-			   else
-				   this._coefficient = new RealScalar (Double.parseDouble(temp[0]));
-			   
-		   }
-		   
+		else
+			if(temp[0].equals(""))
+				this._coefficient = new RealScalar (1);  
+			else
+				this._coefficient = new RealScalar (Double.parseDouble(temp[0]));
+	}
+
 
 	boolean canAdd(PolyTerm pt){
 		int _exponent=pt.getExponent();
@@ -84,11 +88,7 @@ public class PolyTerm implements Comparable{
 	//of multiplying the current PolyTerm and the argument.	
 
 	public PolyTerm mul(PolyTerm pt){
-		Scalar coeff = pt.getCoefficient();
-		Scalar newCoeff = coeff.mul(_coefficient);
-		int pexp = pt.getExponent();
-		PolyTerm newPoly = new PolyTerm(newCoeff,pexp );	
-		return newPoly;
+		return new PolyTerm(_coefficient.mul(pt._coefficient), _exponent+pt._exponent);
 	}
 
 	//evaluate the current term using scalar as the value
@@ -139,10 +139,8 @@ public class PolyTerm implements Comparable{
 				ansC = _coefficient.mul(new RationalScalar(_exponent,1));
 			}
 
-		if (_exponent>=1){
-			ansE = _exponent--;
+			ansE = _exponent-1;
 
-		}
 
 		PolyTerm ansP = new PolyTerm(ansC,ansE);
 		return ansP;
@@ -176,5 +174,12 @@ public class PolyTerm implements Comparable{
 	public PolyTerm clone() {
 		return new PolyTerm(_coefficient, _exponent);
 	}
-
+	@Override
+	public String toString() {
+		if(_exponent==0)
+			return _coefficient.toString();
+		if(_exponent==1)
+			return _coefficient.toString()+"x";
+		return _coefficient.toString()+"x^"+_exponent;
+	}
 }

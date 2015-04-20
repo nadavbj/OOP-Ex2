@@ -113,11 +113,12 @@ public class Polynomial {
 	@Override
 	public String toString() {
 		String result="";
+		sortTerms();
 		for (PolyTerm polyTerm : terms) {
 			result+="+"+polyTerm;
 		}
 		result=result.substring(1);
-		result.replaceAll("+-", "-");
+		result.replaceAll("\\+-", "-");
 		return result;
 	}
 }
