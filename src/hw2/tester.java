@@ -7,7 +7,8 @@ public class tester {
 									"-3x^1+6x^3-0.5x^7",
 									"1x^2+10000x^2",
 									"3x^2+5x^1000",
-									"1+x+x^2"};
+									"1+x+x^2",
+									"1.1x^2+2/3x^3-7x+0"};
 		System.out.println("Build from strings:");
 		for (String expr : testExpressions) {
 			Polynomial p=new Polynomial(expr);
