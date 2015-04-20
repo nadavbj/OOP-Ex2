@@ -102,7 +102,7 @@ public class Polynomial {
 		});
 		for (int i = 0; i < terms.size(); i++) {
 			if(terms.get(i).getCoefficient().isZero())
-				terms.remove(i);
+				terms.remove(i--);
 			while ((i+1)<terms.size() && terms.get(i+1).getExponent()==terms.get(i).getExponent()) {
 				PolyTerm sum=terms.get(i).add(terms.get(i+1));
 				terms.remove(i);
