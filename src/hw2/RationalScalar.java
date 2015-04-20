@@ -148,4 +148,9 @@ public class RationalScalar extends Scalar {
 	public int getDenominator(){
 		return _denominator;
 	}
+
+	@Override
+	public boolean isZero() {
+		return _numerator==0;
+	}
 }

@@ -21,6 +21,7 @@ public abstract class Scalar {
 	 * @return (1/scalar)
 	 */
 	public abstract Scalar inv();
-
+	
+	public abstract boolean isZero();
 
 }

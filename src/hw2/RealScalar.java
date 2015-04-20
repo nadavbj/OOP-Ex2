@@ -1,66 +1,92 @@
-package hw2;/**
- * 
- */
+package hw2;
 
-/**
- * @author nadav
- *
- */
-public class RealScalar extends Scalar {
-	private double value;
+public class RealScalar extends Scalar  {
+	private double _value;
 	
 	public RealScalar(double value) {
-		this.value=value;
+		this._value=value;
+	}
+
+	public RealScalar(Scalar other){
+		RealScalar real = (RealScalar) other;
+		_value = real.getValue();	
+	}
+	/**
+	 * addition of two RealNumbers.
+	 * assuming arg is a RealNumber.
+	 **/
+	
+	public Scalar add(Scalar arg) {
+			RealScalar rs=(RealScalar) arg;
+			double Value = rs.getValue();
+			double  tValue = Value + _value;
+			Scalar newScalar = new RealScalar (tValue);	
+			return newScalar;
 	}
 
 	/**
-	 * @see Scalar#add(Scalar)
-	 */
-	@Override
-	public Scalar add(Scalar s) {
-		if(s instanceof RationalScalar){
-			RationalScalar rs=(RationalScalar) s;
-			return new RealScalar(value+((double)rs.getNumenator())/rs.getDenominator());
+	 * multiplication of two RealNumbers.
+	 * assuming arg is a RealNumber.
+	**/
+	
+	public Scalar mul(Scalar arg) {
+		RealScalar realArg = (RealScalar) arg;
+			double valueArg = realArg.getValue();
+			double tValue = valueArg * _value;
+			Scalar newScalar = new RealScalar(tValue);		
+			return newScalar;
 		}
-		RealScalar rs=(RealScalar)s;
-		return new RealScalar(value+rs.value);
-	}
-
+							
 	/**
-	 * @see Scalar#mul(Scalar)
+	 * negation of the Real Number.
 	 */
-	@Override
-	public Scalar mul(Scalar s) {
-		if(s instanceof RationalScalar){
-			RationalScalar rs=(RationalScalar) s;
-			return new RealScalar(value*((double)rs.getNumenator())/rs.getDenominator());
+	public  Scalar neg() {
+		double tvalue = _value;
+		
+		if(_value==0 ){
+			return new RealScalar(this);
 		}
-		RealScalar rs=(RealScalar)s;
-		return new RealScalar(value*rs.value);
+		else
+		{
+			tvalue = _value * (-1);
+		}
+					
+		return new RealScalar(tvalue);
 	}
 
 	/**
-	 * @see Scalar#neg()
+	 * inverse of the Real Number.
 	 */
-	@Override
-	public Scalar neg() {
-		return new RealScalar(-value);
+		public Scalar inv() {
+		double tValue =  _value;
+		if(_value == 0){
+			return new RealScalar(this);
+		}
+		else {
+			tValue = (1/_value);
+		}
+	
+		Scalar newScalar = new RealScalar(tValue);		
+		return newScalar;
 	}
-
-	/**
-	 * @see Scalar#inv()
-	 */
-	@Override
-	public Scalar inv() {
-		return new RealScalar(1/value);
-	}
+		public String toString(){
+			String str = new String();		
+			String.format("%.3f", _value);
+			str = str + _value ;
+			return str;		
+		}
 
 	public double getValue() {
-		return value;
+		return _value;
 	}
 
 	public void setValue(double value) {
-		this.value = value;
+		this._value = value;
+	}
+
+	@Override
+	public boolean isZero() {
+		return _value==0;
 	}
 
 }
