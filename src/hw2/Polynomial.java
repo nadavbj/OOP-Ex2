@@ -20,8 +20,9 @@ public class Polynomial {
 		expr.replaceAll("\\/+-", "\\/-");
 		String polyTerms[]=expr.split("\\+");
 		for (int i = 0; i < polyTerms.length; i++) {
-			if(!polyTerms[i].equals(""))
+			if(!polyTerms[i].equals("")){
 				terms.addElement(new PolyTerm(polyTerms[i]));
+			}
 		}
 		sortTerms();
 	}
