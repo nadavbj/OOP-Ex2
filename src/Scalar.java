@@ -21,5 +21,5 @@ public abstract class Scalar {
 	 */
 	public abstract Scalar inv();
 
-
+	public abstract boolean isZero();
 }
