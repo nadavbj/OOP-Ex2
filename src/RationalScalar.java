@@ -1,4 +1,3 @@
-
 //checl rather can real with rat
 public class RationalScalar extends Scalar {
 	private int _numerator;

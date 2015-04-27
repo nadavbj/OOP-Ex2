@@ -1,4 +1,3 @@
-
 public class PolyTerm implements Comparable{
 	private Scalar _coefficient;
 	private int _exponent;

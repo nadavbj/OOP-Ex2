@@ -1,4 +1,3 @@
-
 public class RealScalar extends Scalar  {
 	private double _value;
 	
