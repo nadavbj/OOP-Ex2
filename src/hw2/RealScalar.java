@@ -1,3 +1,4 @@
+package hw2;
 public class RealScalar extends Scalar  {
 	private double _value;
 	

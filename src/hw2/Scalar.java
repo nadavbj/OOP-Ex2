@@ -1,3 +1,4 @@
+package hw2;
 public abstract class Scalar {
 	/**
 	 * accepts a scalar argument and returns a
