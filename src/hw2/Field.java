@@ -1,5 +1,3 @@
 package hw2;
 
-public enum Field {
-	Rational,Real
-}
+public enum Field { Rational, Real }
